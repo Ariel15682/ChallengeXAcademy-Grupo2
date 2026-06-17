@@ -1,4 +1,4 @@
-describe('Archivo principal', () => {
+describe('login exitoso', () => {
 
     beforeEach(() => {
         cy.fixture('dataUsers').as('users')
