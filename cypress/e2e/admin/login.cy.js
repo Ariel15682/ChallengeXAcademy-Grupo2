@@ -1,20 +1,33 @@
-describe('login exitoso', () => {
+describe('Pruebas de login', () => {
+    beforeEach(()=>{
+        cy.visit('https://automationintesting.online/admin/')
+    })
 
-    beforeEach(() => {
-        cy.fixture('dataUsers').as('users')
-      })
+    it('Login exitoso',()=>{
     
-    it('Logout desde el menú hamburguesa', function () {
-        cy.login(this.users.standard_user,this.users.password)
-        cy.validateInventoryPage()
-        cy.get('#react-burger-menu-btn').click()
-        cy.get('[data-test="logout-sidebar-link"]').should('be.visible').click()
-        cy.url().should('contains', 'https://www.saucedemo.com/')
-     })
+        cy.get('#username').type('admin')
+        cy.get('#password').type('password')
+        cy.get('#doLogin').click()
+        cy.url().should('include','/admin/')
 
-     it('Login con usuario bloqueado (locked_out_user)', function () {
-        cy.login(this.users.locked_out_user,this.users.password)
-        cy.get('[data-test="error"]').should('be.visible')
-        .and('contain', 'Epic sadface: Sorry, this user has been locked out.')
-     })
+    })
+
+    it('Login con contrasenia incorrecta',()=>{
+        // cy.log('test 2')
+        cy.get('#username').type('admin')
+        cy.get('#password').type('123')
+        cy.get('#doLogin').click()
+
+        cy.get('class="alert alert-danger"').should('be.visible').and('contain','Invalid credentials')
+
+    })
+
+    it('Login con campos vacíos',()=>{
+        
+        cy.get('#doLogin').click()
+
+        cy.get('class="alert alert-danger"').should('be.visible').and('contain','Invalid credentials')
+
+        
+    })
 })
