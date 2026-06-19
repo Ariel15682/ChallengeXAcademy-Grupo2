@@ -1,6 +1,6 @@
 import './commands'
 
-// Para poder correr tests sin que fallen por errores de React minified, agregamos un handler global para uncaught exceptions:
+/*/ Para poder correr tests sin que fallen por errores de React minified, agregamos un handler global para uncaught exceptions:
 Cypress.on('uncaught:exception', (err) => {
   // ignorar errores de React minified que incluyen "Minified React error #418"
   if (err && err.message && err.message.includes('Minified React error #418')) {
@@ -8,3 +8,15 @@ Cypress.on('uncaught:exception', (err) => {
   }
   // para otros errores dejar que Cypress falle
 });
+*/
+
+import './commands'
+
+// Handler global para uncaught exceptions
+Cypress.on('uncaught:exception', (err) => {
+  // Ignorar solo el error minificado de React #418
+  if (err && err.message && err.message.includes('Minified React error #418')) {
+    return false
+  }
+  // Para otros errores, dejar que Cypress falle
+})
