@@ -1,13 +1,19 @@
 describe ('Rooms',() =>{
-
- beforeEach(() =>{
-
-    cy.visit('https://automationintesting.online/')
- })
  
-    it('TC-031 - Verificacion del boton "Today" en single room',()=> {
+    const link = 'https://automationintesting.online'
 
-        
-    })
+  beforeEach(() => {
+    cy.visit(link)
+    
+  })
 
+  it ('Verificacion del boton "Today" en single room', () => {
+     cy.navigate()
+     cy.get(':nth-child(1) > .card > .card-footer > .btn').click()
+     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)').should('be.visible').and('contain', 'Today').click()
+
+
+    
+    
+  })
 })
