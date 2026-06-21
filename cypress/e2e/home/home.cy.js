@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-// Casos TC-001 a TC-010-Módulo Home excepto TC-009 (Blocked por no encontrarse)(Ariel Diaz)
 // Web bajo prueba: https://automationintesting.online/
 //
 // NOTA SOBRE LOS BUGS:
