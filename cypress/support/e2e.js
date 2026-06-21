@@ -23,3 +23,5 @@ Cypress.on('uncaught:exception', (err) => {
   }
   // Para otros errores, dejar que Cypress falle
 })
+
+import "cypress-real-events/support";

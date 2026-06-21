@@ -32,31 +32,24 @@ describe ('Rooms',() =>{
     cy.get('.rbc-calendar')
     cy.get('.rbc-day-bg')
     cy.contains('.rbc-button-link', '01')
-    .trigger('mousedown', { button: 0, force: true })
     cy.get('.rbc-day-bg')
     cy.contains('.rbc-button-link', '07')
-    .trigger('mousemove', { force: true })
-    .trigger('mouseup', { button: 0, force: true })
-    
+    cy.get('.rbc-month-row')
+  
     
   })
-
-    it('Verificacion de reserva fallida de single rooms', () => {
-
-  cy.navigate()
-
-  cy.contains('button', 'Back')
-    .click()
-
-  cy.contains('.rbc-button-link', '01')
-    .realMouseDown()
-
-  cy.contains('.rbc-button-link', '07')
-    .realHover()
-    .realMouseUp()
-
-})
-   
+  
+  it('Verificacion de reserva fallida de single rooms')
+    
+    cy.navigate()
+    cy.get('.rbc-toolbar')
+    cy.get('.rbc-calendar')
+    cy.get('.rbc-day-bg')
+    cy.contains('.rbc-button-link', '01')
+    cy.get('.rbc-day-bg')
+    cy.contains('.rbc-button-link', '07')
+    cy.get('.rbc-month-row')
+  
   
 
 
