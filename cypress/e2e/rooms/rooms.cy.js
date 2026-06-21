@@ -157,13 +157,28 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
     
   })
 
-it('Verificacion de reserva fallida double rooms',()=> {
+it('Verificacion de reserva fallida suite rooms',()=> {
     cy.navigateSuite()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
     cy.reserveDateFail('2026-06-29', '2026-07-08')
+    cy.get('.btn-primary')
+    .should('be.visible')
+    .and('contain','Reserve Now')
+    .click()
+    
+    
+  })
+
+  it('Verificacion de reserva sin llenar campos',()=> {
+    cy.navigateSingle()
+    cy.get('.rbc-day-bg')
+    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
+    .and('contain','Today')
+    .click()
+    cy.reserveDateEmpty('2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
