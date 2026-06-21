@@ -26,7 +26,7 @@ Cypress.Commands.add('navigateDouble', () => {
   
 })
 
-Cypress.Commands.add('navigateDouble', () => {
+Cypress.Commands.add('navigateSuite', () => {
   cy.visit('https://automationintesting.online/')
   cy.get(':nth-child(1) > .nav-link').click()
   cy.get('#rooms > .container > .row > :nth-child(3)')
@@ -39,17 +39,6 @@ Cypress.Commands.add('navigateDouble', () => {
   cy.get('.rbc-calendar')
   
 })
-
-
-
-
-
-
-
-
-
-
-
 
 Cypress.Commands.add('reserveOk', (checkin, checkout) => {
 

@@ -110,7 +110,37 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
      .and('contain','Suite Room')
   })
 
+  
+  it('Verificacion de reserva exitosa double rooms',()=> {
+    cy.navigateDouble()
+    cy.get('.rbc-day-bg')
+    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
+    .and('contain','Today')
+    .click()
+    cy.reserveOk('2026-06-29', '2026-07-08')
+    cy.get('.btn-primary')
+    .should('be.visible')
+    .and('contain','Reserve Now')
+    .click()
+    
+    
+  })
 
+  it('Verificacion de reserva fallida double rooms',()=> {
+    cy.navigateDouble()
+    cy.get('.rbc-day-bg')
+    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
+    .and('contain','Today')
+    .click()
+    cy.reserveDateFail('2026-06-29', '2026-07-08')
+    cy.get('.btn-primary')
+    .should('be.visible')
+    .and('contain','Reserve Now')
+    .click()
+    
+    
+  })
+   
 
 
 
