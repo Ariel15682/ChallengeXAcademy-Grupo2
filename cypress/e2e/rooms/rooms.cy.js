@@ -92,6 +92,18 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
   })
 
 
+  it ('Verificacion de seleccion de otras alternativas de rooms', () => {
+     cy.navigate()
+     cy.get('.container > .fs-4').scrollIntoView()
+     .and('contain','Similar Rooms You Might Like')
+     cy.get(':nth-child(1) > .card > .card-body > .card-title')
+     .and('contain','Suite')
+     cy.get(':nth-child(1) > .card > .card-body > .btn')
+     .and('contain','View Details')
+     .click()
+  })
+
+
     
      
   
