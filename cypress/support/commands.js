@@ -9,6 +9,7 @@ Cypress.Commands.add('navigate', () => {
   cy.get(':nth-child(1) > .card > .card-footer > .btn')
     .click()
   cy.get('.rbc-calendar')
+  
 })
 
 Cypress.Commands.add('reserveOk', (checkin, checkout) => {
