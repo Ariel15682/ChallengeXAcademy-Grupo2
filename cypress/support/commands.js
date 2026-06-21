@@ -41,3 +41,66 @@ Cypress.Commands.add('reserveOk', (checkin, checkout) => {
       .type(data.reservationRegisterOk.phone)
   })
 })
+
+
+Cypress.Commands.add('reserveDateFail', (checkin, checkout) => {
+
+  cy.fixture('registerNewReservation').then((data) => {
+
+    cy.visit(
+      `https://automationintesting.online/reservation/1?checkin=${checkin}&checkout=${checkout}`
+    )
+
+    cy.get('#doReservation')
+      .should('be.visible')
+      .and('contain', 'Reserve Now')
+      .click()
+
+    cy.get('[name="firstname"]')
+      .clear()
+      .type(data.reservationRegisterError.Name)
+
+    cy.get('[name="lastname"]')
+      .clear()
+      .type(data.reservationRegisterError.LastName)
+
+    cy.get('[name="email"]')
+      .clear()
+      .type(data.reservationRegisterError.email)
+
+    cy.get('[name="phone"]')
+      .clear()
+      .type(data.reservationRegisterError.phone)
+  })
+})
+
+Cypress.Commands.add('reserveDateEmpty', (checkin, checkout) => {
+
+  cy.fixture('registerNewReservation').then((data) => {
+
+    cy.visit(
+      `https://automationintesting.online/reservation/1?checkin=${checkin}&checkout=${checkout}`
+    )
+
+    cy.get('#doReservation')
+      .should('be.visible')
+      .and('contain', 'Reserve Now')
+      .click()
+
+    cy.get('[name="firstname"]')
+      .clear()
+      .type(data.reservationRegisterEmpty.Name)
+
+    cy.get('[name="lastname"]')
+      .clear()
+      .type(data.reservationRegisterEmpty.LastName)
+
+    cy.get('[name="email"]')
+      .clear()
+      .type(data.reservationRegisterEmpty.email)
+
+    cy.get('[name="phone"]')
+      .clear()
+      .type(data.reservationRegisterEmpty.phone)
+  })
+})
