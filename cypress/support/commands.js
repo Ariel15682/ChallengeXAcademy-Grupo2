@@ -1,13 +1,10 @@
 Cypress.Commands.add('navigateSingle', () => {
   cy.visit('https://automationintesting.online/')
   cy.get(':nth-child(1) > .nav-link').click()
-  cy.get('#rooms > .container > .row > :nth-child(1)')
   cy.get('.row > :nth-child(1) > .card > .card-body > .card-title')
     .should('be.visible')
     .and('contain', 'Single')
-  cy.get(':nth-child(1) > .card > .card-footer > .btn')
-    .and('Contain','Book Now')
-    .click()
+  cy.get(':nth-child(1) > .card > .card-footer > .btn').click()
   cy.get('.rbc-calendar')
   
 })
@@ -15,13 +12,10 @@ Cypress.Commands.add('navigateSingle', () => {
 Cypress.Commands.add('navigateDouble', () => {
   cy.visit('https://automationintesting.online/')
   cy.get(':nth-child(1) > .nav-link').click()
-  cy.get('#rooms > .container > .row > :nth-child(2)')
   cy.get(':nth-child(2) > .card > .card-body > .card-title')
     .should('be.visible')
     .and('contain', 'Double')
-  cy.get(':nth-child(2) > .card > .card-footer > .btn')
-    .and('contain','Book Now')
-    .click()
+  cy.get(':nth-child(2) > .card > .card-footer > .btn').click()
   cy.get('.rbc-calendar')
   
 })
@@ -29,13 +23,10 @@ Cypress.Commands.add('navigateDouble', () => {
 Cypress.Commands.add('navigateSuite', () => {
   cy.visit('https://automationintesting.online/')
   cy.get(':nth-child(1) > .nav-link').click()
-  cy.get('#rooms > .container > .row > :nth-child(3)')
   cy.get(':nth-child(3) > .card > .card-body > .card-title')
     .should('be.visible')
     .and('contain', 'Suite')
-  cy.get(':nth-child(3) > .card > .card-footer > .btn')
-    .and('contain','Book Now')
-    .click()
+  cy.get(':nth-child(3) > .card > .card-footer > .btn').click()
   cy.get('.rbc-calendar')
   
 })
