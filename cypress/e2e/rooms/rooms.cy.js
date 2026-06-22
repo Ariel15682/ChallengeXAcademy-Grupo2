@@ -77,6 +77,7 @@ describe ('Rooms',() =>{
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.get('.alert')
 
   })
 
@@ -137,6 +138,7 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.get('.alert')
     
     
   })
@@ -168,6 +170,7 @@ it('Verificacion de reserva fallida suite rooms',()=> {
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.get('.alert')
     
     
   })
@@ -183,6 +186,7 @@ it('Verificacion de reserva fallida suite rooms',()=> {
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.get('.alert')
     
     
   })

@@ -106,21 +106,5 @@ Cypress.Commands.add('reserveDateEmpty', (checkin, checkout) => {
       .should('be.visible')
       .and('contain', 'Reserve Now')
       .click()
-
-    cy.get('[name="firstname"]')
-      .clear()
-      .type(data.reservationRegisterEmpty.Name)
-
-    cy.get('[name="lastname"]')
-      .clear()
-      .type(data.reservationRegisterEmpty.LastName)
-
-    cy.get('[name="email"]')
-      .clear()
-      .type(data.reservationRegisterEmpty.email)
-
-    cy.get('[name="phone"]')
-      .clear()
-      .type(data.reservationRegisterEmpty.phone)
   })
 })
