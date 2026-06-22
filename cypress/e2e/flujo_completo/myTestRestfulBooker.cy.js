@@ -7,58 +7,59 @@
 
 describe('Restful Booker - Flujos principales', () => {
   beforeEach(() => {
-    // Cada test arranca de cero en la Home, así son independientes entre sí.
+    // Cada test arranca de cero en la Home (tests independientes).
     cy.visit('/')
   })
 
   // ------------------------------------------------------------------
-  // 3.1-Reserva exitosa como usuario invitado
+  // 3.1 - Reserva exitosa como usuario invitado
   // ------------------------------------------------------------------
   it('Permite reservar una habitación como invitado con datos válidos', () => {
     cy.fixture('bookingData').then((data) => {
       const guest = data.guest
 
-      // 1. Se muestran habitaciones disponibles en la página principal.
-      //    Cada habitación ofrece un botón para reservar.
-      cy.contains(/book now/i).should('be.visible') // [CONFIRMAR] texto del botón de la habitación
+      // 1. Se muestran habitaciones disponibles (cada una con su link de reserva).
+      cy.get('a[href*="/reservation"]').should('have.length.greaterThan', 0)
 
-      // 2. Seleccionar una habitación y abrir el formulario de reserva.
-      //    "Book now" navega a /reservation/{id} usando las fechas por defecto del Home.
-      cy.contains(/book now/i).first().click()
-      cy.contains('button', 'Reserve Now').click() // [CONFIRMAR] abre el formulario de reserva
+      // 2. Seleccionar una habitación: abre su página de reserva.
+      cy.get('a[href*="/reservation"]').first().click()
+      cy.url().should('include', '/reservation/')
 
-      // 3. Completar el formulario con datos válidos.
-      cy.get('input[placeholder="Firstname"]').type(guest.firstname) // [CONFIRMAR] selectores del form
-      cy.get('input[placeholder="Lastname"]').type(guest.lastname)
-      cy.get('input[placeholder="Email"]').type(guest.email)
-      cy.get('input[placeholder="Phone"]').type(guest.phone)
+      // 3. Abrir y completar el formulario con datos válidos.
+      cy.get('#doReservation').click() // abre el formulario de reserva
+      cy.get('.room-firstname').type(guest.firstname)
+      cy.get('.room-lastname').type(guest.lastname)
+      cy.get('.room-email').type(guest.email)
+      cy.get('.room-phone').type(guest.phone)
 
-      // 4. Confirmar la reserva y validar el mensaje de éxito.
-      cy.contains('button', 'Reserve Now').click() // [CONFIRMAR] botón de envío
+      // 4. Confirmar la reserva (botón "Reserve Now" sin id) y validar el éxito.
+      cy.get('button.btn.btn-primary.w-100.mb-3').not('#doReservation').click()
       cy.contains('Booking Confirmed').should('be.visible') // [CONFIRMAR] texto de éxito
     })
   })
 
   // ------------------------------------------------------------------
-  // 3.2-Validaciones del formulario de reserva
+  // 3.2 - Validaciones del formulario de reserva
   // ------------------------------------------------------------------
   it('Muestra errores al enviar el formulario de reserva vacío', () => {
-    // Llegar al formulario de reserva.
-    cy.contains(/book now/i).first().click()
-    cy.contains('button', 'Reserve Now').click() // abre el formulario
+    // Llegar a la página de reserva y abrir el formulario.
+    cy.get('a[href*="/reservation"]').first().click()
+    cy.url().should('include', '/reservation/')
+    cy.get('#doReservation').click() // abre el formulario
 
     // 1. Intentar enviar el formulario sin completar ningún campo.
-    cy.contains('button', 'Reserve Now').click()
+    cy.get('button.btn.btn-primary.w-100.mb-3').not('#doReservation').click()
 
     // 2. Aparecen los mensajes de error correspondientes.
-    cy.contains(/must not be empty|size must be|well-formed/i).should('be.visible') // [CONFIRMAR]
+    cy.contains(/must not be empty|should not be blank|size must be|well-formed/i)
+      .should('be.visible') // [CONFIRMAR] texto real del error
 
     // 3. No se realizó ninguna reserva (no aparece la confirmación).
     cy.contains('Booking Confirmed').should('not.exist')
   })
 
   // ------------------------------------------------------------------
-  // 3.3-Formulario de contacto
+  // 3.3 - Formulario de contacto
   // ------------------------------------------------------------------
   it('Permite enviar el formulario de contacto con datos válidos', () => {
     cy.fixture('bookingData').then((data) => {
