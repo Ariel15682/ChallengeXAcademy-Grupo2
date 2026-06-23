@@ -53,10 +53,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveOk(1,'2026-06-29', '2026-07-08')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
     
     
   })
@@ -114,10 +118,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveOk(2,'2026-06-29', '2026-07-08')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
     
     
   })
@@ -146,11 +154,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveOk(3,'2026-06-29', '2026-07-08')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
-    
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
     
    })
 
