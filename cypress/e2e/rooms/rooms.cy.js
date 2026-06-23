@@ -23,10 +23,15 @@ describe ('Rooms',() =>{
     cy.get('.rbc-calendar')
     cy.get('.rbc-day-bg')
     cy.reserveOk(1,'2026-05-01', '2026-05-07')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
+   
     
   })
   
@@ -38,10 +43,15 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveOk(1,'2026-06-01', '2026-06-07')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
+    
     
     
   })
@@ -63,6 +73,7 @@ describe ('Rooms',() =>{
     .should('eq', 201)
     
     
+    
   })
 
    it('Verificacion de reserva fallida con datos invalidos',()=> {
@@ -72,10 +83,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveDateFail(1,'2026-06-29', '2026-07-08')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
     cy.get('.alert')
 
   })
@@ -128,6 +143,7 @@ describe ('Rooms',() =>{
     .should('eq', 201)
     
     
+    
   })
 
   it('Verificacion de reserva fallida double rooms',()=> {
@@ -137,10 +153,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveDateFail(2,'2026-06-29', '2026-07-08')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
     cy.get('.alert')
     
     
@@ -158,10 +178,11 @@ describe ('Rooms',() =>{
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
-    .click()
     cy.wait('@createBooking')
     .its('response.statusCode')
     .should('eq', 201)
+    .click()
+    
     
    })
 
@@ -172,10 +193,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveDateFail(3,'2026-06-29', '2026-07-08')
+    cy.intercept('POST', '**/api/booking').as('createBooking')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
+    cy.wait('@createBooking')
+    .its('response.statusCode')
+    .should('eq', 201)
     cy.get('.alert')
     
     
