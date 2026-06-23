@@ -31,13 +31,11 @@ Cypress.Commands.add('navigateSuite', () => {
   
 })
 
-Cypress.Commands.add('reserveOk', (checkin, checkout) => {
+Cypress.Commands.add('reserveOk', (roomId, checkin, checkout) => {
 
   cy.fixture('registerNewReservation').then((data) => {
 
-    cy.visit(
-      `https://automationintesting.online/reservation/1?checkin=${checkin}&checkout=${checkout}`
-    )
+    cy.visit(`https://automationintesting.online/reservation/${roomId}?checkin=${checkin}&checkout=${checkout}`)
 
     cy.get('#doReservation')
       .should('be.visible')
@@ -63,13 +61,11 @@ Cypress.Commands.add('reserveOk', (checkin, checkout) => {
 })
 
 
-Cypress.Commands.add('reserveDateFail', (checkin, checkout) => {
+Cypress.Commands.add('reserveDateFail', (roomId, checkin, checkout) => {
 
   cy.fixture('registerNewReservation').then((data) => {
 
-    cy.visit(
-      `https://automationintesting.online/reservation/1?checkin=${checkin}&checkout=${checkout}`
-    )
+    cy.visit(`https://automationintesting.online/reservation/${roomId}?checkin=${checkin}&checkout=${checkout}`)
 
     cy.get('#doReservation')
       .should('be.visible')
@@ -94,13 +90,11 @@ Cypress.Commands.add('reserveDateFail', (checkin, checkout) => {
   })
 })
 
-Cypress.Commands.add('reserveDateEmpty', (checkin, checkout) => {
+Cypress.Commands.add('reserveDateEmpty', (roomId, checkin, checkout) => {
 
   cy.fixture('registerNewReservation').then((data) => {
 
-    cy.visit(
-      `https://automationintesting.online/reservation/1?checkin=${checkin}&checkout=${checkout}`
-    )
+    cy.visit(`https://automationintesting.online/reservation/${roomId}?checkin=${checkin}&checkout=${checkout}`)
 
     cy.get('#doReservation')
       .should('be.visible')

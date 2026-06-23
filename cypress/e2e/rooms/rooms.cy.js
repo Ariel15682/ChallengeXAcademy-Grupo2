@@ -1,11 +1,6 @@
 describe ('Rooms',() =>{
  
-    const link = 'https://automationintesting.online'
-
-  beforeEach(() => {
-    cy.visit(link)
     
-  })
 
   it ('Verificacion del boton "Today" en single room', () => {
      cy.navigateSingle()
@@ -27,14 +22,14 @@ describe ('Rooms',() =>{
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(2)').should('be.visible').and('contain', 'Back').click()
     cy.get('.rbc-calendar')
     cy.get('.rbc-day-bg')
-    cy.reserveOk('2026-05-01', '2026-05-07')
+    cy.reserveOk(1,'2026-05-01', '2026-05-07')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
     
-    
   })
+  
   
   it('Verificacion de reserva fallida de single rooms en dias pasados',()=> {
     cy.navigateSingle()
@@ -42,7 +37,7 @@ describe ('Rooms',() =>{
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveOk('2026-06-01', '2026-06-07')
+    cy.reserveOk(1,'2026-06-01', '2026-06-07')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -57,7 +52,7 @@ describe ('Rooms',() =>{
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveOk('2026-06-29', '2026-07-08')
+    cy.reserveOk(1,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -72,7 +67,7 @@ describe ('Rooms',() =>{
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveDateFail('2026-06-29', '2026-07-08')
+    cy.reserveDateFail(1,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -81,7 +76,7 @@ describe ('Rooms',() =>{
 
   })
 
-it ('Verificacion de seleccion de otras alternativas de rooms', () => {
+  it ('Verificacion de seleccion de otras alternativas de rooms', () => {
      cy.navigateSingle()
      cy.get('.container > .fs-4')
      .and('contain','Similar Rooms You Might Like')
@@ -118,7 +113,7 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveOk('2026-06-29', '2026-07-08')
+    cy.reserveOk(2,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -133,7 +128,7 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveDateFail('2026-06-29', '2026-07-08')
+    cy.reserveDateFail(2,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -150,22 +145,22 @@ it ('Verificacion de seleccion de otras alternativas de rooms', () => {
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveOk('2026-06-29', '2026-07-08')
+    cy.reserveOk(3,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
     .click()
     
     
-  })
+   })
 
-it('Verificacion de reserva fallida suite rooms',()=> {
+  it('Verificacion de reserva fallida suite rooms',()=> {
     cy.navigateSuite()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveDateFail('2026-06-29', '2026-07-08')
+    cy.reserveDateFail(3,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -173,7 +168,7 @@ it('Verificacion de reserva fallida suite rooms',()=> {
     cy.get('.alert')
     
     
-  })
+   })
 
   it('Verificacion de reserva sin llenar campos',()=> {
     cy.navigateSingle()
@@ -181,7 +176,7 @@ it('Verificacion de reserva fallida suite rooms',()=> {
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
     .and('contain','Today')
     .click()
-    cy.reserveDateEmpty('2026-06-29', '2026-07-08')
+    cy.reserveDateEmpty(1,'2026-06-29', '2026-07-08')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
@@ -189,7 +184,7 @@ it('Verificacion de reserva fallida suite rooms',()=> {
     cy.get('.alert')
     
     
-  })
+   })
     
      
   
