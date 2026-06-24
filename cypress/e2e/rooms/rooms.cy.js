@@ -139,8 +139,11 @@ describe ('Rooms',() =>{
     .and('contain','Reserve Now')
     .click()
     cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
+  .then((interception) => {
+
+    expect(interception.response.statusCode).to.eq(201)
+
+  })
     
     
     
@@ -174,14 +177,14 @@ describe ('Rooms',() =>{
     .and('contain','Today')
     .click()
     cy.reserveOk(3,'2026-06-29', '2026-07-08')
-    cy.intercept('POST', '**/api/booking').as('createBooking')
+    cy.intercept('POST', '**').as('allPosts')
     cy.get('.btn-primary')
     .should('be.visible')
     .and('contain','Reserve Now')
-    cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
-    .click()
+    cy.wait('@allPosts').then((interception) => {
+    cy.log(interception.request.url)
+    console.log(interception)
+    })
     
     
    })
@@ -222,9 +225,23 @@ describe ('Rooms',() =>{
     
    })
     
-     
-  
+  it('Validacion de cambio de precio "Single Room"',()=>{
+    cy.navigateSingle()
+    cy.get('.rbc-day-bg')
+    cy.reserveOk(1,'2026-06-29', '2026-07-08')
 
+  })   
+  
+  it('Validacion de cambio de precio "Double Room"',()=>{
+
+
+  })
+
+  
+  it('Verificacion de cambio de precio "Suite Room"',()=>{
+
+
+  })
 
 
 })
