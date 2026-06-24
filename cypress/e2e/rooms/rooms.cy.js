@@ -1,23 +1,32 @@
 describe ('Rooms',() =>{
  
-    
-
-  it ('Verificacion del boton "Today" en single room', () => {
+    it ('TC-031 Verificacion del boton "Today" en single room', () => {
      cy.navigateSingle()
-     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)').should('be.visible').and('contain', 'Today').click()
+     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
+     .should('be.visible')
+     .and('contain', 'Today')
+     .click()
+   
   })
   
-  it('Verificacion del boton "Back" en single room', () => {
+  it('TC-032 Verificacion del boton "Back" en single room', () => {
     cy.navigateSingle()
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(2)').should('be.visible').and('contain', 'Back').click()  
- })
+    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(2)')
+    .should('be.visible')
+    .and('contain', 'Back')
+    .click()  
+ 
+  })
 
-  it('Verificacion del boton "Next" en single room',() => {
+  it('TC-033 Verificacion del boton "Next" en single room',() => {
     cy.navigateSingle()
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(3)').should('be.visible').and('contain', 'Next').click()
+    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(3)')
+    .should('be.visible')
+    .and('contain', 'Next').click()
+  
   })
   
-  it('Verificacion de reserva fallida de single rooms, mes anterior',()=>{
+  it('TC-034 Verificacion de reserva fallida de single rooms, mes anterior',()=>{
     cy.navigateSingle()
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(2)').should('be.visible').and('contain', 'Back').click()
     cy.get('.rbc-calendar')
@@ -32,11 +41,10 @@ describe ('Rooms',() =>{
     .its('response.statusCode')
     .should('eq', 201)
    
-    
   })
   
   
-  it('Verificacion de reserva fallida de single rooms en dias pasados',()=> {
+  it('TC-035 Verificacion de reserva fallida de single rooms en dias pasados',()=> {
     cy.navigateSingle()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -52,11 +60,9 @@ describe ('Rooms',() =>{
     .its('response.statusCode')
     .should('eq', 201)
     
-    
-    
   })
 
-  it('Verificacion de reserva exitosa',()=> {
+  it('TC-036 Verificacion de reserva exitosa',()=> {
     cy.navigateSingle()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -72,11 +78,9 @@ describe ('Rooms',() =>{
     .its('response.statusCode')
     .should('eq', 201)
     
-    
-    
   })
 
-   it('Verificacion de reserva fallida con datos invalidos',()=> {
+   it('TC-037 Verificacion de reserva fallida con datos invalidos',()=> {
     cy.navigateSingle()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -95,7 +99,7 @@ describe ('Rooms',() =>{
 
   })
 
-  it ('Verificacion de seleccion de otras alternativas de rooms', () => {
+  it ('TC-038 Verificacion de seleccion de otras alternativas de rooms', () => {
      cy.navigateSingle()
      cy.get('.container > .fs-4')
      .and('contain','Similar Rooms You Might Like')
@@ -108,10 +112,11 @@ describe ('Rooms',() =>{
      .click()
      cy.get('.col-lg-8 > :nth-child(1) > .fw-bold')
      .and('contain','Double Room')
+  
   })
 
 
-  it ('Verificacion de seleccion de otras alternativas de rooms', () => {
+  it ('TC-039 Verificacion de seleccion de otras alternativas de rooms', () => {
      cy.navigateSingle()
      cy.get('.container > .fs-4')
      .and('contain','Similar Rooms You Might Like')
@@ -123,10 +128,11 @@ describe ('Rooms',() =>{
      .click()
      cy.get('.col-lg-8 > :nth-child(1) > .fw-bold')
      .and('contain','Suite Room')
+  
   })
 
   
-  it('Verificacion de reserva exitosa double rooms',()=> {
+  it('TC-040 Verificacion de reserva exitosa double rooms',()=> {
     cy.navigateDouble()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -139,17 +145,14 @@ describe ('Rooms',() =>{
     .and('contain','Reserve Now')
     .click()
     cy.wait('@createBooking')
-  .then((interception) => {
-
+    .then((interception) => {
     expect(interception.response.statusCode).to.eq(201)
 
-  })
-    
-    
+   })
     
   })
 
-  it('Verificacion de reserva fallida double rooms',()=> {
+  it('TC-041 Verificacion de reserva fallida double rooms',()=> {
     cy.navigateDouble()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -170,7 +173,7 @@ describe ('Rooms',() =>{
   })
    
 
-  it('Verificacion de reserva exitosa suite rooms',()=> {
+  it('TC-042 Verificacion de reserva exitosa suite rooms',()=> {
     cy.navigateSuite()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -189,7 +192,7 @@ describe ('Rooms',() =>{
     
    })
 
-  it('Verificacion de reserva fallida suite rooms',()=> {
+  it('TC-049 Verificacion de reserva fallida suite rooms',()=> {
     cy.navigateSuite()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -209,7 +212,8 @@ describe ('Rooms',() =>{
     
    })
 
-  it('Verificacion de reserva sin llenar campos',()=> {
+  
+   it('TC-050 Verificacion de reserva sin llenar campos',()=> {
     cy.navigateSingle()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
@@ -225,22 +229,26 @@ describe ('Rooms',() =>{
     
    })
     
-  it('Validacion de cambio de precio "Single Room"',()=>{
+  
+   it('TC-081 Validacion de cambio de precio "Single Room"',()=>{
     cy.navigateSingle()
-    cy.get('.rbc-day-bg')
-    cy.reserveOk(1,'2026-06-29', '2026-07-08')
+    cy.selectReservationDates(1,'2026-06-29','2026-07-08')
+    cy.get('form > .card > .card-body > :nth-child(2) > :nth-child(1)')
+    
 
   })   
   
-  it('Validacion de cambio de precio "Double Room"',()=>{
-
-
+  it('TC-082 Validacion de cambio de precio "Double Room"',()=>{
+    cy.navigateDouble()
+    cy.selectReservationDates(2,'2026-06-29','2026-07-08')
+    cy.get('form > .card > .card-body > :nth-child(2)')
   })
 
   
-  it('Verificacion de cambio de precio "Suite Room"',()=>{
-
-
+  it('TC-083 Verificacion de cambio de precio "Suite Room"',()=>{
+    cy.navigateDouble()
+    cy.selectReservationDates(3,'2026-06-29','2026-07-08')
+    cy.get('form > .card > .card-body > :nth-child(2)')
   })
 
 

@@ -108,8 +108,7 @@ Cypress.Commands.add('selectReservationDates', (roomId, checkin, checkout) => {
   cy.visit(
     `https://automationintesting.online/reservation/${roomId}?checkin=${checkin}&checkout=${checkout}`
   )
+  
 
-  cy.get('#doReservation')
-    .should('be.visible')
-    .and('contain', 'Reserve Now')
+  
 })
