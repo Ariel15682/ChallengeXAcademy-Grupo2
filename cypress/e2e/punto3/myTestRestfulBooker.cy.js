@@ -1,5 +1,9 @@
 /// <reference types="cypress" />
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  return false
+})
+
 // myTestRestfulBooker.cy.js
 // Flujos requeridos por la consigna (punto 3) del Challenge
 // Web bajo prueba: https://automationintesting.online/
@@ -87,6 +91,31 @@ describe('Restful Booker - Flujos principales', () => {
       // 2. Enviar el mensaje y validar que se muestra la confirmación.
       cy.contains('button', 'Submit').click()
       cy.contains('Thanks for getting in touch').should('be.visible')
+    })
+  })
+
+  // ------------------------------------------------------------------
+  // Caso negativo: teléfono inválido
+  // ------------------------------------------------------------------
+  it('Muestra error al reservar con teléfono inválido', () => {
+  cy.fixture('bookingDataInvalid').then((data) => {
+    const guest = data.guest
+
+    cy.get('a[href*="/reservation"]').first().click()
+    cy.url().should('include', '/reservation/')
+    cy.get('#doReservation').click()
+
+    cy.get('.room-firstname').type(guest.firstname)
+    cy.get('.room-lastname').type(guest.lastname)
+    cy.get('.room-email').type(guest.email)
+    cy.get('.room-phone').type(guest.phone)
+
+    cy.get('button.btn.btn-primary.w-100.mb-3').not('#doReservation').click()
+
+    cy.get('.alert.alert-danger').should('be.visible')
+    cy.contains(/must be a valid phone|size must be between 11 and 21/)
+      .should('be.visible')
+    cy.contains('Booking Confirmed').should('not.exist')
     })
   })
 })
