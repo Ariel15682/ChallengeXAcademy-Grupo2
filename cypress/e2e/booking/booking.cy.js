@@ -54,4 +54,33 @@ describe('Booking - Shady Meadows B&B', () => {
 
 })
 
+    it('no se puede reservar con fechas pasadas', () => {
+
+    cy.contains('Check In').parent().find('input').scrollIntoView().click()
+
+    cy.get('.react-datepicker__day--001').first().click()
+
+
+    cy.contains('Check Out').parent().find('input').click()
+
+    cy.get('.react-datepicker__day--003').first().click()
+
+    cy.contains('Check Availability').click()
+
+    cy.contains('Book now').should('be.visible')
+
+    cy.contains('Book now').last().click()
+
+    cy.contains('Reserve Now').click()
+
+    cy.get('.room-firstname').type('Juan')
+    cy.get('.room-lastname').type('Perez')
+    cy.get('.room-email').type('juan@gmail.com')
+    cy.get('.room-phone').type('54351262487200')
+
+    cy.contains('Reserve Now').click()
+
+    cy.contains('Booking Confirmed').should('not.exist')
+
     })
+})
