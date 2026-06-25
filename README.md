@@ -48,3 +48,4 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/m3pereyra/QAAutomation2026-Cypress.git
+then execute npm install
