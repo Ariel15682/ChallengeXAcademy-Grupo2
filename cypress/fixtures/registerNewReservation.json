@@ -1,0 +1,22 @@
+{
+  "reservationRegisterOk": {
+    "Name": "Pepe",
+    "LastName": "Argento",
+    "phone": "5435145678900",
+    "email": "pepe.argento123@testmail.com"
+  },
+  "reservationRegisterError": {
+    "Name": "@#$%&*!_+-=<>",
+    "LastName": "@#$%&*!_+-=<>",
+    "phone": "!@#$%^&*()>><<<0",
+    "email": "!45621pj#$%^&*@testmail.com"
+  },
+
+  "reservationRegisterEmpty": {
+    "Name": "",
+    "LastName": "",
+    "phone": "",
+    "email": ""
+}
+
+}
