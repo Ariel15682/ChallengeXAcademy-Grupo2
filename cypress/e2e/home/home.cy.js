@@ -1,12 +1,7 @@
 /// <reference types="cypress" />
 
 // Web bajo prueba: https://automationintesting.online/
-//
-// NOTA SOBRE LOS BUGS:
-// TC-006 y TC-007 validan el comportamiento ESPERADO. Correcto: el calendario
-// debe bloquear las fechas anteriores a la actual. Como el sitio tiene esos defectos
-// (BUG-001 y BUG-002), estos dos tests fallarán de forma intencional y dejan
-// documentado el bug en la corrida.
+
 
 describe('Home', () => {
   beforeEach(() => {
