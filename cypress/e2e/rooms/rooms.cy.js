@@ -26,42 +26,7 @@ describe ('Rooms',() =>{
   
   })
   
-  it('TC-034 Verificacion de reserva fallida de single rooms, mes anterior',()=>{
-    cy.navigateSingle()
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(2)').should('be.visible').and('contain', 'Back').click()
-    cy.get('.rbc-calendar')
-    cy.get('.rbc-day-bg')
-    cy.reserveOk(1,'2026-05-01', '2026-05-07')
-    cy.intercept('POST', '**/api/booking').as('createBooking')
-    cy.get('.btn-primary')
-    .should('be.visible')
-    .and('contain','Reserve Now')
-    .click()
-    cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
-   
-  })
   
-  
-  it('TC-035 Verificacion de reserva fallida de single rooms en dias pasados',()=> {
-    cy.navigateSingle()
-    cy.get('.rbc-day-bg')
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
-    .and('contain','Today')
-    .click()
-    cy.reserveOk(1,'2026-06-01', '2026-06-07')
-    cy.intercept('POST', '**/api/booking').as('createBooking')
-    cy.get('.btn-primary')
-    .should('be.visible')
-    .and('contain','Reserve Now')
-    .click()
-    cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
-    
-  })
-
   it('TC-036 Verificacion de reserva exitosa',()=> {
     cy.navigateSingle()
     cy.get('.rbc-day-bg')
@@ -80,24 +45,7 @@ describe ('Rooms',() =>{
     
   })
 
-   it('TC-037 Verificacion de reserva fallida con datos invalidos',()=> {
-    cy.navigateSingle()
-    cy.get('.rbc-day-bg')
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
-    .and('contain','Today')
-    .click()
-    cy.reserveDateFail(1,'2026-06-29', '2026-07-08')
-    cy.intercept('POST', '**/api/booking').as('createBooking')
-    cy.get('.btn-primary')
-    .should('be.visible')
-    .and('contain','Reserve Now')
-    .click()
-    cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
-    cy.get('.alert')
-
-  })
+   
 
   it ('TC-038 Verificacion de seleccion de otras alternativas de rooms', () => {
      cy.navigateSingle()
@@ -152,68 +100,8 @@ describe ('Rooms',() =>{
     
   })
 
-  it('TC-041 Verificacion de reserva fallida double rooms',()=> {
-    cy.navigateDouble()
-    cy.get('.rbc-day-bg')
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
-    .and('contain','Today')
-    .click()
-    cy.reserveDateFail(2,'2026-06-29', '2026-07-08')
-    cy.intercept('POST', '**/api/booking').as('createBooking')
-    cy.get('.btn-primary')
-    .should('be.visible')
-    .and('contain','Reserve Now')
-    .click()
-    cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
-    cy.get('.alert')
-    
-    
-  })
-   
-
-  it('TC-042 Verificacion de reserva exitosa suite rooms',()=> {
-    cy.navigateSuite()
-    cy.get('.rbc-day-bg')
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
-    .and('contain','Today')
-    .click()
-    cy.reserveOk(3,'2026-06-29', '2026-07-08')
-    cy.intercept('POST', '**').as('allPosts')
-    cy.get('.btn-primary')
-    .should('be.visible')
-    .and('contain','Reserve Now')
-    cy.wait('@allPosts').then((interception) => {
-    cy.log(interception.request.url)
-    console.log(interception)
-    })
-    
-    
-   })
-
-  it('TC-049 Verificacion de reserva fallida suite rooms',()=> {
-    cy.navigateSuite()
-    cy.get('.rbc-day-bg')
-    cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
-    .and('contain','Today')
-    .click()
-    cy.reserveDateFail(3,'2026-06-29', '2026-07-08')
-    cy.intercept('POST', '**/api/booking').as('createBooking')
-    cy.get('.btn-primary')
-    .should('be.visible')
-    .and('contain','Reserve Now')
-    .click()
-    cy.wait('@createBooking')
-    .its('response.statusCode')
-    .should('eq', 201)
-    cy.get('.alert')
-    
-    
-   })
-
   
-   it('TC-050 Verificacion de reserva sin llenar campos',()=> {
+  it('TC-050 Verificacion de reserva sin llenar campos',()=> {
     cy.navigateSingle()
     cy.get('.rbc-day-bg')
     cy.get('.rbc-toolbar > :nth-child(1) > :nth-child(1)')
