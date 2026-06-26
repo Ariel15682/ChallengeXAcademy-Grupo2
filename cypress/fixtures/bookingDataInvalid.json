@@ -1,0 +1,8 @@
+{
+  "guest": {
+    "firstname": "Juan",
+    "lastname": "Perez",
+    "email": "juan@gmail.com",
+    "phone": "123"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "guest": {
+    "firstname": "Juan",
+    "lastname": "Perez",
+    "email": "juan@gmail.com",
+    "phone": "54351262487200"
+  },
+  "contact": {
+    "name": "Juan Perez",
+    "email": "juan@gmail.com",
+    "phone": "54351262487200",
+    "subject": "Consulta sobre reservas",
+    "message": "Hola, me gustaria obtener mas informacion sobre las habitaciones disponibles para el mes de agosto."
+  }
+}
