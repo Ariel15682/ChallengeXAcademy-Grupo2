@@ -40,6 +40,13 @@ Bugs reported in Trello:
 
 [Trello Board - Challenge Cohorte I 2026 Grupo 2](https://trello.com/invite/b/6a2b4f7d00616c0cff0b57b2/ATTI90e7b2ea8b347358ee6afeee9416491975BF2DFA/challenge-cohorte-i-2026-grupo-2)
 
+
+## 🔌 API Testing (Postman) 
+
+Las pruebas de API se encuentran en la carpeta `postman-tests`.  
+Archivo: `ShadyMeadows_API_Tests.postman_collection.json`  
+Este archivo puede importarse en Postman para ejecutar los casos de prueba de la API.
+
 ---
 
 ## ⚙️ Installation
@@ -48,12 +55,4 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/m3pereyra/QAAutomation2026-Cypress.git
-then execute npm install
-
----
-
-## 🔌 API Testing (Postman)
-
-Las pruebas de API se encuentran en la carpeta `postman-tests`.  
-Archivo: `ShadyMeadows_API_Tests.postman_collection.json`  
-Este archivo puede importarse en Postman para ejecutar los casos de prueba de la API.
+npm install ```
